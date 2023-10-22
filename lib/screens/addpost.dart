@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class ProfileScreen extends StatelessWidget {
-  static const routeName = '/profilescreen';
+class AddPostScreen extends StatelessWidget {
+  static const routeName = '/addpostscreen';
   @override
   Widget build(BuildContext context) {
     return const Center(
       child: Text(
-        "Profile Screen",
+        "Add post Screen",
         style: TextStyle(color: Colors.black, fontSize: 32),
       ),
     );

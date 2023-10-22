@@ -1,103 +1,179 @@
 import 'package:flutter/material.dart';
 
-class postItem extends StatelessWidget {
-  postItem({
-    required this.text,
-    required this.likes,
-    required this.image,
-  });
-
-  final String image;
-  final String text;
-  final int likes;
+class PostItem extends StatelessWidget {
+  late final String url;
+  late final String name;
+  late final String location;
+  late final int likes;
+  late final String caption;
+  PostItem(
+      {required this.name,
+      required this.caption,
+      required this.likes,
+      required this.location,
+      required this.url});
 
   @override
   Widget build(BuildContext context) {
+    final mediaquery = MediaQuery.of(context).size;
+
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        const SizedBox(
+          height: 2,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                const SizedBox(
-                  width: 10,
-                ),
-                Container(
-                  padding: const EdgeInsets.all(2),
-                  decoration: const BoxDecoration(
-                      color: Colors.red, shape: BoxShape.circle),
-                  child: Container(
-                    padding: const EdgeInsets.all(1),
-                    decoration: const BoxDecoration(
-                        color: Colors.black, shape: BoxShape.circle),
-                    child: ClipOval(
-                      child: SizedBox.fromSize(
-                        size: const Size.fromRadius(15),
-                        child: Image.asset(
-                          image,
-                          fit: BoxFit.cover,
-                        ),
+            Container(
+              child: Row(
+                children: [
+                  ClipOval(
+                    child: SizedBox.fromSize(
+                      size: const Size.fromRadius(18),
+                      child: Image.asset(
+                        url,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  text,
-                  style: TextStyle(color: Theme.of(context).hintColor),
-                ),
-              ],
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        name,
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      Text(
+                        location,
+                        style: const TextStyle(
+                            color: Colors.grey,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600),
+                      )
+                    ],
+                  )
+                ],
+              ),
             ),
             IconButton(
-              alignment: Alignment.topRight,
               onPressed: () {},
-              icon: Icon(
-                Icons.more_vert,
-                color: Theme.of(context).hintColor,
+              icon: const Icon(
+                Icons.more_vert_outlined,
+                color: Colors.white,
               ),
             ),
           ],
         ),
-        Container(
-          height: 450,
-          width: 450,
-          child: Image.asset(
-            image,
-            fit: BoxFit.cover,
-          ),
+        const SizedBox(
+          height: 2,
+        ),
+        SizedBox(
+            height: mediaquery.height * 0.4,
+            width: mediaquery.width,
+            child: Image.asset(
+              url,
+              fit: BoxFit.cover,
+            )),
+        const SizedBox(
+          height: 5,
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.favorite_border,
-                color: Theme.of(context).hintColor,
+            Container(
+              child: Row(
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.favorite_border_outlined,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.comment_rounded,
+                      color: Colors.white,
+                      size: 28,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.send_sharp,
+                      color: Colors.white,
+                      size: 26,
+                    ),
+                  ),
+                ],
               ),
             ),
             IconButton(
               onPressed: () {},
-              icon: Icon(
-                Icons.comment_outlined,
-                color: Theme.of(context).hintColor,
+              icon: const Icon(
+                Icons.bookmarks_outlined,
+                color: Colors.white,
+                size: 28,
               ),
-            ),
-            IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.arrow_outward_sharp,
-                  color: Theme.of(context).hintColor,
-                ))
+            )
           ],
         ),
-        Text(
-          "$likes likes",
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Theme.of(context).hintColor),
+        Padding(
+          padding: const EdgeInsets.only(left: 10, top: 3),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "$likes Likes",
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500),
+              ),
+              Row(
+                children: [
+                  Text(
+                    name,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    caption,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 4,
+              ),
+              const Text(
+                "View all comments",
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500),
+              ),
+            ],
+          ),
         )
       ],
     );

@@ -1,40 +1,30 @@
 import 'package:flutter/material.dart';
 
-class MessageItem extends StatelessWidget {
-  const MessageItem(
-    this.duration,
-    this.imagePath,
-    this.message,
-    this.name,
-  );
-  final String imagePath;
+class Messageitem extends StatelessWidget {
   final String name;
-  final int duration;
-  final String message;
+  final String url;
+  final String time;
+  final String msg;
+
+  const Messageitem({
+    required this.name,
+    required this.msg,
+    required this.time,
+    required this.url,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         ListTile(
-          leading: Container(
-            padding: const EdgeInsets.all(3),
-            decoration: const BoxDecoration(
-              color: Colors.red,
-              shape: BoxShape.circle,
-            ),
-            child: Container(
-              padding: const EdgeInsets.all(2),
-              decoration: const BoxDecoration(
-                  color: Colors.black, shape: BoxShape.circle),
-              child: ClipOval(
-                child: SizedBox.fromSize(
-                  size: const Size.fromRadius(22),
-                  child: Image.asset(
-                    imagePath,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+          leading: ClipOval(
+            child: SizedBox.fromSize(
+              size: const Size.fromRadius(29),
+              child: Image.asset(
+                url,
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -43,20 +33,20 @@ class MessageItem extends StatelessWidget {
             style: const TextStyle(color: Colors.white),
           ),
           subtitle: Text(
-            '$message .$duration min',
+            "$msg .$time",
             style: const TextStyle(color: Colors.grey),
           ),
           trailing: IconButton(
-            icon: const Icon(
-              Icons.camera_alt_outlined,
-              color: Colors.white,
-            ),
-            onPressed: () {},
-          ),
+              onPressed: () {},
+              icon: const Icon(
+                Icons.camera_alt_outlined,
+                size: 28,
+                color: Colors.white,
+              )),
         ),
-        // Divider(
-        //   color: Colors.grey.shade800,
-        // ),
+        const SizedBox(
+          height: 10,
+        )
       ],
     );
   }
